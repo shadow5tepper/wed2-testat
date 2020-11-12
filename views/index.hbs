@@ -1,0 +1,66 @@
+<div class="tool-bar">
+    <form action="/create" method="get">
+        <input type="submit" value="Create new Note">
+    </form>
+    <form action="/" method="get">
+        <input type="hidden" name="style" value="{{style}}"/>
+        <button type="submit" class="btn-style-change">Switch Style</button>
+    </form>
+</div>
+
+<div class="sort-filter-bar">
+    <div class="sorting">
+        <form action="/" method="get">
+            <input type="hidden" name="sort" value="duedate"/>
+            <button type="submit">By due Date</button>
+        </form>
+        <form action="/" method="get">
+            <input type="hidden" name="sort" value="createdate"/>
+            <button type="submit">By creation Date</button>
+        </form>
+        <form action="/" method="get">
+            <input type="hidden" name="sort" value="importance" />
+            <button type="submit">By Importance</button>
+        </form>
+    </div>
+    <div class="filtering">
+        <form action="/" method="get">
+            {{#if filter}}
+                <input type="hidden" name="filter" value=false />
+                <button type="submit" class="btn-filter">show All</button>
+            {{else}}
+                <input type="hidden" name="filter" value=true />
+                <button type="submit" class="btn-filter">hide Finished</button>
+            {{/if}}
+        </form>
+    </div>
+</div>
+
+<section class="notes">
+    {{#each list}}
+        <article>
+            <header>
+                <div class="notes-duedate">
+                    <time datetime="{{duedate}}">{{duedate}}</time>
+                </div>
+                <div class="notes-importance">
+                    {{#times importance}}
+                        <span class="stars"></span>
+                    {{/times}}
+                </div>
+            </header>
+            <div class="notes-content">
+                <h3>Title: {{this.title}}</h3>
+                <p>Description: {{this.description}}</p>
+            </div>
+            <div class="notes-actions">
+                <label><input type="checkbox" disabled="disabled" {{# if this.finished}}checked{{/if}}>Finished</label>
+                <a href="edit/{{this._id}}">
+                    <button>edit</button>
+                </a>
+            </div>
+        </article>
+    {{else}}
+        <div>no Notes found</div>
+    {{/each}}
+</section>

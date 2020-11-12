@@ -1,0 +1,14 @@
+{ "extends": [
+    "tslint:recommended"
+  ],
+  "rules": {
+    "variable-name": [true, "check-format", "allow-leading-underscore"],
+    "max-classes-per-file": [false],
+    "no-console": [true],
+    "await-promise": true,
+    "comment-format": false,
+    "only-arrow-functions": false
+  },
+  "rulesDirectory": []
+
+}

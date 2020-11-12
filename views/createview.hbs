@@ -1,0 +1,18 @@
+<form action="/create" method="post">
+    <label for="title">Title</label>
+    <input id="title" type="text" name="title" required autofocus>
+
+    <label for="description">Description</label>
+    <input id="description" type="text" name="description">
+
+    <label for="duedate">Due by</label>
+    <input id="duedate" name="duedate" type="date">
+
+    <label for="importance">Importance</label>
+    <input id="importance" type="number" name="importance" min="1" max="5">
+
+    <input type="submit" value="save">
+</form>
+<form action="/" method="get">
+    <input type="submit" value="cancel">
+</form>
