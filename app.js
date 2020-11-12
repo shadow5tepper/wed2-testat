@@ -3,6 +3,8 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+var hbs = require("hbs");
+hbs.registerHelper("times", require("./helpers/timesHelper"));
 
 var indexRouter = require("./routes/index");
 
