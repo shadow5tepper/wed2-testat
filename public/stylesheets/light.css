@@ -6,3 +6,8 @@ body {
 a {
   color: #00B7FF;
 }
+
+.star:before{
+  content: "\2605";
+  display: inline-block;
+}
