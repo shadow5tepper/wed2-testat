@@ -1,66 +1,82 @@
-<div class="tool-bar">
-    <form action="/create" method="get">
-        <input type="submit" value="Create new Note">
-    </form>
-    <form action="/" method="get">
-        <input type="hidden" name="style" value="{{style}}"/>
-        <button type="submit" class="btn-style-change">Switch Style</button>
-    </form>
-</div>
-
-<div class="sort-filter-bar">
-    <div class="sorting">
-        <form action="/" method="get">
-            <input type="hidden" name="sort" value="duedate"/>
-            <button type="submit">By due Date</button>
-        </form>
-        <form action="/" method="get">
-            <input type="hidden" name="sort" value="createdate"/>
-            <button type="submit">By creation Date</button>
-        </form>
-        <form action="/" method="get">
-            <input type="hidden" name="sort" value="importance" />
-            <button type="submit">By Importance</button>
-        </form>
+<main>
+    <div class="bar">
+        <div class="create">
+            <form action="/create" method="get">
+                <button type="submit">Create new Note</button>
+            </form>
+        </div>
+        <div class="style">
+            <form action="/" method="get">
+              <input type="hidden" name="style" value="{{style}}"/>
+             <button type="submit" class="btn-style-change">Switch Style</button>
+            </form>
+        </div>
     </div>
-    <div class="filtering">
-        <form action="/" method="get">
-            {{#if filter}}
-                <input type="hidden" name="filter" value=false />
-                <button type="submit" class="btn-filter">show All</button>
-            {{else}}
-                <input type="hidden" name="filter" value=true />
-                <button type="submit" class="btn-filter">hide Finished</button>
-            {{/if}}
-        </form>
-    </div>
-</div>
 
-<section class="notes">
-    {{#each list}}
-        <article>
-            <header>
-                <div class="notes-duedate">
-                    <time datetime="{{duedate}}">{{duedate}}</time>
-                </div>
-                <div class="notes-importance">
-                    {{#times importance}}
-                        <span class="star"></span>
-                    {{/times}}
-                </div>
-            </header>
-            <div class="notes-content">
-                <h3>Title: {{this.title}}</h3>
-                <p>Description: {{this.description}}</p>
+    <div class="bar">
+        <div class="sorting">
+            <div class="byduedate">
+                <form action="/" method="get">
+                    <input type="hidden" name="sort" value="duedate"/>
+                    <button type="submit">By due Date</button>
+                </form>
             </div>
-            <div class="notes-actions">
-                <label><input type="checkbox" disabled="disabled" {{# if this.finished}}checked{{/if}}>Finished</label>
-                <a href="edit/{{this._id}}">
-                    <button>edit</button>
-                </a>
+            <div class="bycreatdate">
+                <form action="/" method="get">
+                    <input type="hidden" name="sort" value="createdate"/>
+                    <button type="submit">By creation Date</button>
+                </form>
             </div>
-        </article>
-    {{else}}
-        <div>no Notes found</div>
-    {{/each}}
-</section>
+            <div class="byimportance">
+                <form action="/" method="get">
+                    <input type="hidden" name="sort" value="importance" />
+                    <button type="submit">By Importance</button>
+                </form>
+            </div>
+        </div>
+        <div class="filtering">
+            <form action="/" method="get">
+                {{#if filter}}
+                    <input type="hidden" name="filter" value="false" />
+                    <button type="submit" class="btn-filter">show All</button>
+                {{else}}
+                    <input type="hidden" name="filter" value="true" />
+                    <button type="submit" class="btn-filter">hide Finished</button>
+                {{/if}}
+            </form>
+        </div>
+    </div>
+
+    <section class="notes">
+        {{#each list}}
+            <article>
+                <header>
+                    <span class="notes-duedate">
+                        <time datetime="{{duedate}}">{{duedate}}</time>
+                    </span>
+                    <span>{{this.title}}</span>
+                    <div class="notes-importance">
+                        {{#times this.importance}}
+                            <span class="star"></span>
+                        {{/times}}
+                    </div>
+                </header>
+                <div class="notes-content">
+                    <textarea readonly>{{description}}</textarea>
+                </div>
+                <div class="notes-actions">
+                    <div class="isfinished">
+                        <label><input type="checkbox" disabled="disabled" {{# if this.finished}}checked{{/if}}>Finished</label>
+                    </div>
+                    <div class="edit">
+                        <a href="edit/{{this._id}}">
+                            <button>edit</button>
+                        </a>
+                    </div>
+                </div>
+            </article>
+        {{else}}
+            <div>no Notes found</div>
+        {{/each}}
+    </section>
+</main>

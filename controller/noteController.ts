@@ -3,9 +3,17 @@ var store = require("../services/noteStore");
 module.exports = {
   showIndex: function (req, res) {
     const sort: string = req.query.sort || req.cookies.sort || "duedate";
-    const order: number = req.query.order || req.cookies.order || 1;
-    let filter: boolean = req.query.filter || req.cookies.filter || false;
+    let order: number = req.query.order || req.cookies.order || 1;
+    const tempFilter: string = req.query.filter || req.cookies.filter;
     const theme: string = req.query.style || req.cookies.style || "light";
+
+    let filter: boolean = tempFilter === "true";
+
+    if (req.query.sort === req.cookies.sort) {
+      order = order == 1 ? -1 : 1;
+    } else {
+      order = 1;
+    }
 
     res.cookie("sort", sort);
     res.cookie("order", order);
