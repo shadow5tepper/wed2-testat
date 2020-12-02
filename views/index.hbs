@@ -1,47 +1,54 @@
 <main>
-    <div class="bar">
-        <div class="create">
-            <form action="/create" method="get">
-                <button type="submit">Create new Note</button>
-            </form>
+    <div class="menu">
+        <div class="bar">
+            <div class="create">
+                <form action="/create" method="get">
+                    <button type="submit">Create new Note</button>
+                </form>
+            </div>
+            <div class="style">
+                <form action="/" method="get">
+                 {{#if options.theme}}
+                     <input type="hidden" name="theme" value="dark"/>
+                     <button type="submit" class="btn-style-change">Switch to Dark</button>
+                 {{else}}
+                     <input type="hidden" name="theme" value="light"/>
+                     <button type="submit" class="btn-style-change">Switch to Light</button>
+                 {{/if}}
+                </form>
+            </div>
         </div>
-        <div class="style">
-            <form action="/" method="get">
-              <input type="hidden" name="style" value="{{style}}"/>
-             <button type="submit" class="btn-style-change">Switch Style</button>
-            </form>
-        </div>
-    </div>
 
-    <div class="bar">
-            <div class="byduedate">
+        <div class="bar">
+                <div class="byduedate">
+                    <form action="/" method="get">
+                        <input type="hidden" name="sort" value="duedate"/>
+                        <button type="submit">By due Date</button>
+                    </form>
+                </div>
+                <div class="bycreatdate">
+                    <form action="/" method="get">
+                        <input type="hidden" name="sort" value="createdAt"/>
+                        <button type="submit">By creation Date</button>
+                    </form>
+                </div>
+                <div class="byimportance">
+                    <form action="/" method="get">
+                        <input type="hidden" name="sort" value="importance" />
+                        <button type="submit">By Importance</button>
+                    </form>
+                </div>
+            <div class="filtering">
                 <form action="/" method="get">
-                    <input type="hidden" name="sort" value="duedate"/>
-                    <button type="submit">By due Date</button>
+                    {{#if options.filter}}
+                        <input type="hidden" name="filter" value="false" />
+                        <button type="submit" class="btn-filter">show All</button>
+                    {{else}}
+                        <input type="hidden" name="filter" value="true" />
+                        <button type="submit" class="btn-filter">hide Finished</button>
+                    {{/if}}
                 </form>
             </div>
-            <div class="bycreatdate">
-                <form action="/" method="get">
-                    <input type="hidden" name="sort" value="createdAt"/>
-                    <button type="submit">By creation Date</button>
-                </form>
-            </div>
-            <div class="byimportance">
-                <form action="/" method="get">
-                    <input type="hidden" name="sort" value="importance" />
-                    <button type="submit">By Importance</button>
-                </form>
-            </div>
-        <div class="filtering">
-            <form action="/" method="get">
-                {{#if filter}}
-                    <input type="hidden" name="filter" value="false" />
-                    <button type="submit" class="btn-filter">show All</button>
-                {{else}}
-                    <input type="hidden" name="filter" value="true" />
-                    <button type="submit" class="btn-filter">hide Finished</button>
-                {{/if}}
-            </form>
         </div>
     </div>
 

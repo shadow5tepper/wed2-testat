@@ -1,41 +1,78 @@
 var store = require("../services/noteStore");
 
+class Options {
+  sort: string;
+  filter: boolean;
+  order: number;
+  theme;
+
+  constructor() {
+    this.sort = "duedate";
+    this.filter = false;
+    this.order = 1;
+    this.theme = "light";
+  }
+
+  setOptions(req) {
+    this.sort = req.query.sort || req.cookies.sort || "duedate";
+    this.filter =
+      (req.query.filter || req.cookies.filter || "false") === "true";
+    this.theme = req.query.style || req.cookies.style || "light";
+  }
+
+  setCookies(res) {
+    res.cookie("sort", this.sort);
+    res.cookie("order", this.order);
+    res.cookie("filter", this.filter);
+    res.cookie("style", this.theme);
+  }
+}
+
 module.exports = {
   showIndex: function (req, res) {
-    const sort: string = req.query.sort || req.cookies.sort || "duedate";
-    let order: number = req.query.order || req.cookies.order || 1;
-    const tempFilter: string = req.query.filter || req.cookies.filter;
-    const theme: string = req.query.style || req.cookies.style || "light";
+    let options: Options = new Options();
 
-    let filter: boolean = tempFilter === "true";
+    if (Object.keys(req.cookies).length > 1) {
+      if (Object.keys(req.query).length < 1) {
+        options.setOptions(req);
+        options.setCookies(res);
 
-    if (req.query.sort === req.cookies.sort) {
-      order = order == 1 ? -1 : 1;
+        options.theme = options.theme === "light" ? "true" : "false";
+
+        store.all(options.sort, options.order, options.filter, function (
+          err,
+          data
+        ) {
+          res.render("index", {
+            list: data,
+            options,
+          });
+        });
+      } else {
+        let order = options.order;
+        if (req.query.sort === req.cookies.sort) {
+          order = order == 1 ? -1 : 1;
+        } else {
+          order = 1;
+        }
+
+        options.setOptions(req);
+        options.order = order;
+        options.setCookies(res);
+        res.redirect("/");
+      }
     } else {
-      order = 1;
+      options.setOptions(req);
+      options.setCookies(res);
+      res.redirect("/");
     }
-
-    res.cookie("sort", sort);
-    res.cookie("order", order);
-    res.cookie("filter", filter);
-    res.cookie("style", theme);
-
-    const style: string = theme === "light" ? "dark" : "light";
-
-    store.all(sort, order, filter, function (err, data) {
-      res.render("index", {
-        list: data,
-        filter: filter,
-        theme: theme,
-        style: style,
-      });
-    });
   },
 
   showNew: function (req, res) {
-    const theme = req.cookies.style;
+    let options: Options = new Options();
+    options.setOptions(req);
     res.render("createview", {
-      theme: theme,
+      options,
     });
   },
 
@@ -46,9 +83,10 @@ module.exports = {
   },
 
   showEdit: function (req, res) {
-    const theme = req.cookies.style;
+    let options: Options = new Options();
+    options.setOptions(req);
     store.get(req.params.id, function (err, data) {
-      res.render("editview", { item: data, theme: theme });
+      res.render("editview", { item: data, options });
     });
   },
 

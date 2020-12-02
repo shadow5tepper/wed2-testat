@@ -7,8 +7,8 @@
 body {
     padding: 50px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-    align-items: center;
 }
+
 
 a {
     color: #00B7FF;
@@ -89,6 +89,12 @@ header {
     display: inline-block;
 }
 
+.menu{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .bar{
     display: flex;
     flex-flow: row wrap;
@@ -105,6 +111,8 @@ header {
 .notes {
     padding: 2rem 1rem;
     align-items: center;
+    display: flex;
+    flex-direction: column;
 }
 
 label {
@@ -133,8 +141,11 @@ label > textarea {
     width: 75%;
 }
 
+
+
 .attribute {
-    display: block;
+    display: flex;
+    align-items: center;
 }
 
 input[type="range"]::-moz-range-track {
@@ -144,6 +155,12 @@ input[type="range"]::-moz-range-track {
 
 .entry{
     display: grid;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 
@@ -183,6 +200,11 @@ input[type="range"]::-moz-range-track {
     .unlabeled {
         margin-left: 0;
     }
+
+    .attribute{
+        flex-direction: column;
+    }
+
 }
 
 @media (min-width: 1080px) {

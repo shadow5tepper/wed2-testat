@@ -3,7 +3,11 @@
   <head>
     <title>{{title}}</title>
     <link rel='stylesheet' href='/stylesheets/layout.css' />
-    <link rel="stylesheet" href="/stylesheets/{{theme}}.css" />
+      {{#if options.theme}}
+          <link rel='stylesheet' href='/stylesheets/light.css' />
+      {{else}}
+          <link rel='stylesheet' href='/stylesheets/dark.css' />
+      {{/if}}
   </head>
   <body>
     {{{body}}}
