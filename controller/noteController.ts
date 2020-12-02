@@ -32,6 +32,7 @@ module.exports = {
   showIndex: function (req, res) {
     let options: Options = new Options();
 
+    options.order = req.cookies.order === "true";
     if (Object.keys(req.cookies).length > 1) {
       if (Object.keys(req.query).length < 1) {
         options.setOptions(req);
