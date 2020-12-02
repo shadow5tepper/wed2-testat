@@ -1,0 +1,193 @@
+*, *:before, *:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    align-items: center;
+}
+
+a {
+    color: #00B7FF;
+}
+
+.star:before{
+    content: "\2605";
+    display: inline-block;
+}
+
+article {
+    margin-bottom: 2em;
+    border-radius: 0.3rem;
+    overflow: auto;
+}
+
+h1 {
+    font-size: 2rem;
+    margin: 0.5rem 0;
+}
+
+span {
+    font-size: 1.2rem;
+}
+
+article > div {
+    display: flex;
+    padding: 0.5rem 0;
+}
+
+article > div > textarea {
+    flex: 2;
+}
+
+article > header {
+    display: flex;
+    justify-content: space-between;
+}
+
+article > header > span:nth-last-child(2) {
+    flex: 1;
+    padding: 0 1rem;
+}
+
+.bar button {
+    border: none;
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
+    border-radius: 0.3rem;
+    margin: 0.5rem;
+    outline: none;
+    text-decoration: none;
+    text-align: center;
+    vertical-align: middle;
+    min-width: 10rem;
+    line-height: 2rem;
+
+}
+
+button {
+    border: none;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.18),0 2px 8px 0 rgba(0,0,0,0.15);
+    border-radius: 0.3rem;
+    margin: 0.5rem;
+    outline: none;
+    text-decoration: none;
+    text-align: center;
+    vertical-align: middle;
+    min-width: 5rem;
+    line-height: 1rem;
+
+}
+
+header {
+    padding: 1rem;
+}
+
+.notes-actions div {
+    display: inline-block;
+}
+
+.bar{
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.bar div {
+    display: inline-block;
+}
+
+.bar > a:last-child {
+    margin-left:auto;
+}
+
+.notes {
+    padding: 2rem 1rem;
+    align-items: center;
+}
+
+label {
+    margin: 1rem;
+}
+
+label > input:not([type=checkbox]),
+textarea {
+    display: inline-block;
+    padding: 0.5rem;
+    margin: 0 .5rem;
+    border-radius: 0.3rem;
+    border: none;
+}
+
+label > span:nth-child(1) {
+    padding: 0.5rem 1rem 0 0;
+    width: 20%;
+    text-align: right;
+    display: inline-block;
+    vertical-align: top;
+}
+
+label > input:not([type=checkbox]),
+label > textarea {
+    width: 75%;
+}
+
+.attribute {
+    display: block;
+}
+
+input[type="range"]::-moz-range-track {
+    background: #EEE;
+    outline: none;
+}
+
+.entry{
+    display: grid;
+}
+
+
+.style, .filtering {
+    float: right;
+}
+
+
+@media (max-width: 1080px) {
+
+    .entry{
+        width: 480px;
+    }
+
+    article > div {
+        flex-direction: column;
+    }
+
+    .bar {
+        flex-flow: column wrap;
+    }
+
+    .bar > a:last-child {
+        margin: 0.5rem;
+    }
+
+    label > span:nth-child(1) {
+        text-align: left;
+    }
+
+    label > input:not([type=checkbox]),
+    label > textarea {
+        width: 100%;
+    }
+
+    label > input[type=checkbox],
+    .unlabeled {
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 1080px) {
+
+    .entry{
+        width: 1080px;
+    }
+}

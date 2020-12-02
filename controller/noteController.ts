@@ -35,7 +35,6 @@ module.exports = {
   showNew: function (req, res) {
     const theme = req.cookies.style;
     res.render("createview", {
-      item: { createdate: new Date().toISOString().substring(0, 10) },
       theme: theme,
     });
   },

@@ -14,7 +14,6 @@
     </div>
 
     <div class="bar">
-        <div class="sorting">
             <div class="byduedate">
                 <form action="/" method="get">
                     <input type="hidden" name="sort" value="duedate"/>
@@ -23,7 +22,7 @@
             </div>
             <div class="bycreatdate">
                 <form action="/" method="get">
-                    <input type="hidden" name="sort" value="createdate"/>
+                    <input type="hidden" name="sort" value="createdAt"/>
                     <button type="submit">By creation Date</button>
                 </form>
             </div>
@@ -33,7 +32,6 @@
                     <button type="submit">By Importance</button>
                 </form>
             </div>
-        </div>
         <div class="filtering">
             <form action="/" method="get">
                 {{#if filter}}
@@ -49,7 +47,7 @@
 
     <section class="notes">
         {{#each list}}
-            <article>
+            <article class="entry">
                 <header>
                     <span class="notes-duedate">
                         <time datetime="{{duedate}}">{{duedate}}</time>

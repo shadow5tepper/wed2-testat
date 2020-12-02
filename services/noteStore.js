@@ -1,5 +1,9 @@
 var Datastore = require("nedb");
-var db = new Datastore({ filename: "./data/notes.db", autoload: true });
+var db = new Datastore({
+  filename: "./data/notes.db",
+  autoload: true,
+  timestampData: true,
+});
 
 function getAllNotes(sortItem, sortOrd, filter, callback) {
   var query = filter ? { finished: { $exists: !filter } } : {};
