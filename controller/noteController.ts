@@ -3,13 +3,13 @@ var store = require("../services/noteStore");
 class Options {
   sort: string;
   filter: boolean;
-  order: number;
+  order: boolean;
   theme: boolean;
 
   constructor() {
     this.sort = "duedate";
     this.filter = false;
-    this.order = 1;
+    this.order = true;
     this.theme = true;
   }
 
@@ -37,25 +37,23 @@ module.exports = {
         options.setOptions(req);
         options.setCookies(res);
 
-        store.all(options.sort, options.order, options.filter, function (
-          err,
-          data
-        ) {
-          res.render("index", {
-            list: data,
-            options,
-          });
-        });
+        store.all(
+          options.sort,
+          options.order ? 1 : -1,
+          options.filter,
+          function (err, data) {
+            res.render("index", {
+              list: data,
+              options,
+            });
+          }
+        );
       } else {
-        let order = options.order;
-        if (req.query.sort === req.cookies.sort) {
-          order = order == 1 ? -1 : 1;
-        } else {
-          order = 1;
-        }
-
+        options.order =
+          req.query.sort !== req.cookies.sort
+            ? true
+            : !(req.cookies.order === "true");
         options.setOptions(req);
-        options.order = order;
         options.setCookies(res);
         res.redirect("/");
       }
