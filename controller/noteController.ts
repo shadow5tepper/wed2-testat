@@ -4,20 +4,20 @@ class Options {
   sort: string;
   filter: boolean;
   order: number;
-  theme;
+  theme: boolean;
 
   constructor() {
     this.sort = "duedate";
     this.filter = false;
     this.order = 1;
-    this.theme = "light";
+    this.theme = true;
   }
 
   setOptions(req) {
     this.sort = req.query.sort || req.cookies.sort || "duedate";
     this.filter =
       (req.query.filter || req.cookies.filter || "false") === "true";
-    this.theme = req.query.style || req.cookies.style || "light";
+    this.theme = (req.query.style || req.cookies.style || "true") === "true";
   }
 
   setCookies(res) {
@@ -36,8 +36,6 @@ module.exports = {
       if (Object.keys(req.query).length < 1) {
         options.setOptions(req);
         options.setCookies(res);
-
-        options.theme = options.theme === "light" ? "true" : "false";
 
         store.all(options.sort, options.order, options.filter, function (
           err,

@@ -9,10 +9,10 @@
             <div class="style">
                 <form action="/" method="get">
                  {{#if options.theme}}
-                     <input type="hidden" name="theme" value="dark"/>
+                     <input type="hidden" name="style" value="false"/>
                      <button type="submit" class="btn-style-change">Switch to Dark</button>
                  {{else}}
-                     <input type="hidden" name="theme" value="light"/>
+                     <input type="hidden" name="style" value="true"/>
                      <button type="submit" class="btn-style-change">Switch to Light</button>
                  {{/if}}
                 </form>
